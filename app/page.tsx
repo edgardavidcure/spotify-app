@@ -43,14 +43,10 @@ export default async function Home() {
       console.log("Spotify Profile:",  spotifyProfile);
       console.log("Top Artists:", topArtists);
       console.log("Top Songs:", topSongs);
+      console.log("Session:", session);
     } catch (error) {
       console.error("Failed to fetch Spotify data:", error);
     }
-  }
-
-  // Ensure data is available before rendering
-  if (!spotifyProfile || !topArtists) {
-    return <div>Loading...</div>; // Optional loading state
   }
 
   // Return the JSX with the fetched data
