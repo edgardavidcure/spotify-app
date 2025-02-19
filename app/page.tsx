@@ -1,4 +1,5 @@
 import { auth } from "./auth";
+import HeroSection from "./components/HeroSection";
 
 import ProfileCard from "./components/ProfileCard";
 import TopArtistsCard from "./components/TopArtistsCard";
@@ -52,23 +53,27 @@ export default async function Home() {
   // Return the JSX with the fetched data
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-[#1DB954] to-[#191414] p-8">
-      {/* Profile Card */}
-      <ProfileCard session={session} spotifyProfile={spotifyProfile} />
-  
-      {session && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-          {/* Top Artists */}
-          <div className="w-[22rem] bg-[#121212] rounded-2xl shadow-lg border border-gray-700 p-6 flex flex-col items-center gap-6 text-white">
-            <TopArtistsCard topArtists={topArtists} />
-          </div>
-  
-          {/* Top Songs */}
-          <div className="w-[22rem] bg-[#121212] rounded-2xl shadow-lg border border-gray-700 p-6 flex flex-col items-center gap-6 text-white">
-            <TopSongsCard topSongs={topSongs} />
+      {session ? (
+        // **Logged-in User View**
+        <div className="flex flex-col items-center">
+          {/* Profile Card */}
+          <ProfileCard session={session} spotifyProfile={spotifyProfile} />
+
+          {/* Top Artists & Top Songs */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <div className="w-[22rem] bg-[#121212] rounded-2xl shadow-lg border border-gray-700 p-6 flex flex-col items-center gap-6 text-white">
+              <TopArtistsCard topArtists={topArtists} />
+            </div>
+
+            <div className="w-[22rem] bg-[#121212] rounded-2xl shadow-lg border border-gray-700 p-6 flex flex-col items-center gap-6 text-white">
+              <TopSongsCard topSongs={topSongs} />
+            </div>
           </div>
         </div>
-      )}
+      ) : ( 
+      <HeroSection/>
+    )
+      }
     </div>
   );
-  
 }
