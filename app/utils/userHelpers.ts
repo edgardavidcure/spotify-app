@@ -26,3 +26,7 @@ export const getInitials = (name: string): string => {
     ? nameParts[0][0] + nameParts[1][0] // First letter of First and Last name
     : nameParts[0][0];
 };
+
+export const formatNumber = (number: number) => {
+  return new Intl.NumberFormat().format(number);
+};

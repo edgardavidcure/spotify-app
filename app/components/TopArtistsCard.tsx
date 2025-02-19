@@ -1,5 +1,6 @@
 'use client';
 
+import { formatNumber } from '@/utils/userHelpers';
 import { AnimatePresence, motion } from 'framer-motion';
 
 interface Artist {
@@ -50,7 +51,7 @@ export default function TopArtistsCard({ topArtists }: TopArtistsCardProps) {
                   {/* Artist Name */}
                   <span className="text-sm font-medium mt-2 truncate">{artist.name}</span>
                   <span className="text-sm mt-2 truncate font-medium text-gray-400">
-                    Followers: {artist.followers.total}
+                    Followers: {formatNumber(artist.followers.total)}
                   </span>
                 </div>
               </motion.li>
