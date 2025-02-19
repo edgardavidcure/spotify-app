@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { ChevronDownIcon } from '@heroicons/react/24/outline';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import { useRouter, useSearchParams } from "next/navigation";
 export default function TopItemsSelector() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const numItems = searchParams.get('limit') || '5';
+  const numItems = searchParams.get("limit") || "5";
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const newLimit = e.target.value;
@@ -14,7 +14,6 @@ export default function TopItemsSelector() {
 
   return (
     <div className="relative mt-6 w-full max-w-xs">
-      
       <div className="relative">
         <select
           value={numItems}

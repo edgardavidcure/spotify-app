@@ -22,7 +22,8 @@ export default async function SignInPage({
         {/* Header Message */}
         <h2 className="text-2xl font-bold mt-6">Your Music Awaits 🎵</h2>
         <p className="text-gray-400 text-center mt-2">
-          Connect your Spotify account to see your top artists, tracks, and more!
+          Connect your Spotify account to see your top artists, tracks, and
+          more!
         </p>
 
         {/* Sign-In Buttons */}

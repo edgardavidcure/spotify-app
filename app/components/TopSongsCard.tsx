@@ -1,22 +1,21 @@
-'use client';
+"use client";
 
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion } from "framer-motion";
 
 interface Song {
-    id: string;
-    name: string;
-    album: {
-      images: { url: string }[];
-    };
-    artists: { name: string }[];
-  }
-  
-  interface TopSongsCardProps {
-    topSongs: {
-      items: Song[];
-    };
-  }
-  
+  id: string;
+  name: string;
+  album: {
+    images: { url: string }[];
+  };
+  artists: { name: string }[];
+}
+
+interface TopSongsCardProps {
+  topSongs: {
+    items: Song[];
+  };
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function TopSongsCard({ topSongs }: TopSongsCardProps) {
@@ -40,7 +39,7 @@ export default function TopSongsCard({ topSongs }: TopSongsCardProps) {
               transition={{ duration: 0.3 }}
               className="flex items-center gap-3 p-2 rounded-lg hover:bg-[#1DB954]/30 transition"
             >
-                {`${index + 1}.`}
+              {`${index + 1}.`}
               {/* Album Cover */}
               <img
                 src={song.album.images[0].url}
@@ -51,7 +50,9 @@ export default function TopSongsCard({ topSongs }: TopSongsCardProps) {
               {/* Song Details */}
               <div className="flex flex-col truncate">
                 <span className="font-semibold truncate">{song.name}</span>
-                <span className="text-sm text-gray-400">{song.artists[0].name}</span>
+                <span className="text-sm text-gray-400">
+                  {song.artists[0].name}
+                </span>
               </div>
             </motion.li>
           ))}

@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 export default function HeroSection() {
   return (
@@ -8,7 +7,8 @@ export default function HeroSection() {
         Discover Your Music Journey 🎶
       </h1>
       <p className="text-lg text-gray-300 mb-8">
-        Connect your Spotify account to see your top artists, tracks, and personalize your music experience.
+        Connect your Spotify account to see your top artists, tracks, and
+        personalize your music experience.
       </p>
 
       {/* Call to Action */}
@@ -41,7 +41,13 @@ export default function HeroSection() {
 }
 
 // Reusable Feature Card Component
-function FeatureCard({ title, description }: { title: string; description: string }) {
+function FeatureCard({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) {
   return (
     <div className="p-6 bg-[#121212] rounded-lg shadow-lg text-white">
       <h3 className="text-xl font-semibold">{title}</h3>

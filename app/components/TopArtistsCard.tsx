@@ -1,21 +1,20 @@
-'use client';
+"use client";
 
-import { formatNumber } from '@/utils/userHelpers';
-import { AnimatePresence, motion } from 'framer-motion';
+import { formatNumber } from "@/utils/userHelpers";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface Artist {
-    id: string;
-    name: string;
-    images: { url: string }[];
-    followers: { total: number };
-  }
-  
-  interface TopArtistsCardProps {
-    topArtists: {
-      items: Artist[];
-    };
-  }
-  
+  id: string;
+  name: string;
+  images: { url: string }[];
+  followers: { total: number };
+}
+
+interface TopArtistsCardProps {
+  topArtists: {
+    items: Artist[];
+  };
+}
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function TopArtistsCard({ topArtists }: TopArtistsCardProps) {
@@ -49,7 +48,9 @@ export default function TopArtistsCard({ topArtists }: TopArtistsCardProps) {
                 />
                 <div className="flex flex-col">
                   {/* Artist Name */}
-                  <span className="text-sm font-medium mt-2 truncate">{artist.name}</span>
+                  <span className="text-sm font-medium mt-2 truncate">
+                    {artist.name}
+                  </span>
                   <span className="text-sm mt-2 truncate font-medium text-gray-400">
                     Followers: {formatNumber(artist.followers.total)}
                   </span>

@@ -65,7 +65,6 @@ export default function ProfileCard({ session, spotifyProfile }: any) {
         <>
           {/* Placeholder Image for Logged Out State */}
           <LoggedOutCard />
-
         </>
       )}
     </div>
