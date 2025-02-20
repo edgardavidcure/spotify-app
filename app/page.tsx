@@ -14,6 +14,7 @@ export default async function Home({
   if (session?.error === "RefreshTokenRevoked") {
     console.log("Refresh token has been revoked. Signing out.");
     signOut();
+    redirect("/"); // Redirect to the login page or another appropriate page
   }
 
   if (!session) {
