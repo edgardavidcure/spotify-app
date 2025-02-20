@@ -2,9 +2,7 @@ import { redirect } from "next/navigation";
 import { auth } from "./auth";
 import HeroSection from "./components/HeroSection";
 import ProfileCard from "./components/ProfileCard";
-import TopArtistsCard from "./components/TopArtistsCard";
-import TopItemsSelector from "./components/TopItemsSelector";
-import TopSongsCard from "./components/TopSongsCard";
+import TopTab from "./components/TopTab";
 
 export default async function Home({
   searchParams,
@@ -65,11 +63,8 @@ export default async function Home({
       <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-[#1DB954] to-[#191414] p-8">
         <ProfileCard session={session} spotifyProfile={profile} />
         {/* User selection should be handled in a Client Component */}
-        <TopItemsSelector />
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-          <TopArtistsCard topArtists={topArtists} />
-          <TopSongsCard topSongs={topSongs} />
+        <div className="flex flex-col items-center justify-between mt-8">
+          <TopTab topArtists={topArtists} topSongs={topSongs} />
         </div>
       </div>
     );

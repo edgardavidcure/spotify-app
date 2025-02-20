@@ -28,7 +28,7 @@ export default function TopArtistsCard({ topArtists }: TopArtistsCardProps) {
 
       {/* Artist List */}
       {topArtists && topArtists.items.length > 0 ? (
-        <ul className="grid grid-cols-1 gap-4">
+        <ul className="space-y-4">
           <AnimatePresence>
             {topArtists.items.map((artist: Artist, index: number) => (
               <motion.li
@@ -44,14 +44,14 @@ export default function TopArtistsCard({ topArtists }: TopArtistsCardProps) {
                 <img
                   src={artist.images[0]?.url || "/placeholder.jpg"}
                   alt={artist.name}
-                  className="w-16 h-16 rounded-full"
+                  className="w-12 h-12 rounded-full"
                 />
                 <div className="flex flex-col">
                   {/* Artist Name */}
-                  <span className="text-sm font-medium mt-2 truncate">
+                  <span className="text-sm font-medium truncate">
                     {artist.name}
                   </span>
-                  <span className="text-sm mt-2 truncate font-medium text-gray-400">
+                  <span className="text-sm truncate font-medium text-gray-400">
                     Followers: {formatNumber(artist.followers.total)}
                   </span>
                 </div>
