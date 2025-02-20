@@ -1,5 +1,6 @@
+import { signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { auth, signOut } from "./auth";
+import { auth } from "./auth";
 import HeroSection from "./components/HeroSection";
 import ProfileCard from "./components/ProfileCard";
 import TopTab from "./components/TopTab";
@@ -12,7 +13,8 @@ export default async function Home({
   const session = await auth();
 
   if (session?.error === "RefreshTokenRevoked") {
-    () => signOut();
+    console.log("Refresh token has been revoked. Signing out.");
+    signOut();
   }
 
   if (!session) {
