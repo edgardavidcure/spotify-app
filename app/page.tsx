@@ -12,7 +12,7 @@ export default async function Home({
   const session = await auth();
 
   if (session?.error === "RefreshTokenRevoked") {
-    signOut();
+    () => signOut();
   }
 
   if (!session) {
