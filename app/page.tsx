@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { auth, signOut } from "./auth";
+import { auth } from "./auth";
 import HeroSection from "./components/HeroSection";
 import ProfileCard from "./components/ProfileCard";
 import TopTab from "./components/TopTab";
@@ -16,7 +16,6 @@ export default async function Home({
     session?.error === "RefreshTokenExpired"
   ) {
     console.log("Refresh token has been revoked or expired. Signing out.");
-    signOut();
     redirect("/signin"); // Redirect to the login page or another appropriate page
   }
 
