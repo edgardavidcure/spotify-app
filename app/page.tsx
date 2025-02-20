@@ -20,7 +20,7 @@ export default async function Home({
   } else {
   }
 
-  const token = session.token?.access_token;
+  const token = session.accessToken;
 
   // ✅ Await searchParams before using them
   const params = await searchParams;
