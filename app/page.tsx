@@ -17,7 +17,7 @@ export default async function Home({
   ) {
     console.log("Refresh token has been revoked or expired. Signing out.");
     signOut();
-    redirect("/login"); // Redirect to the login page or another appropriate page
+    redirect("/signin"); // Redirect to the login page or another appropriate page
   }
 
   if (!session) {
