@@ -1,6 +1,5 @@
-import { signOut } from "next-auth/react";
 import { redirect } from "next/navigation";
-import { auth } from "./auth";
+import { auth, signOut } from "./auth";
 import HeroSection from "./components/HeroSection";
 import ProfileCard from "./components/ProfileCard";
 import TopTab from "./components/TopTab";
