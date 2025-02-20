@@ -128,8 +128,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       }
 
       // Token expired, refresh it
-      console.log("Token:", token);
-
       return await refreshAccessToken(token);
     },
     async session({ session, token }: { session: Session; token: JWT }) {
