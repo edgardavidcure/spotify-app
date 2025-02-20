@@ -104,7 +104,9 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       profile,
     }: {
       token: JWT;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       account?: any;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       profile?: any;
     }) {
       // Initial sign-in
