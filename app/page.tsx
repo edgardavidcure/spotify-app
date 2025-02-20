@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { auth } from "./auth";
+import { auth, signOut } from "./auth";
 import HeroSection from "./components/HeroSection";
 import ProfileCard from "./components/ProfileCard";
 import TopTab from "./components/TopTab";
@@ -10,6 +10,10 @@ export default async function Home({
   searchParams: Promise<Record<string, string | undefined>>;
 }) {
   const session = await auth();
+
+  if (session?.error === "RefreshTokenRevoked") {
+    signOut();
+  }
 
   if (!session) {
     return (
