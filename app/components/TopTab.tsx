@@ -3,9 +3,8 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { TopTabProps } from "../../types";
-import TopArtistsCard from "./TopArtistsCard";
+import TopItemsCard from "./TopItemsCard";
 import TopItemsSelector from "./TopItemsSelector";
-import TopSongsCard from "./TopSongsCard";
 
 const tabs = [
   { id: "topSongs", label: "Top Songs" },
@@ -68,7 +67,11 @@ export default function TopTab({ topArtists, topSongs }: TopTabProps) {
               transition={{ duration: 0.3 }}
               className="flex flex-col gap-6"
             >
-              <TopArtistsCard topArtists={{ items: topArtists.items }} />
+              <TopItemsCard
+                title="🎤 Top Artists"
+                items={topArtists.items}
+                type="artists"
+              />
             </motion.div>
           )}
 
@@ -81,7 +84,11 @@ export default function TopTab({ topArtists, topSongs }: TopTabProps) {
               transition={{ duration: 0.3 }}
               className="flex flex-col  gap-6"
             >
-              <TopSongsCard topSongs={{ items: topSongs.items }} />
+              <TopItemsCard
+                title="🎵 Top Songs"
+                items={topSongs.items}
+                type="songs"
+              />
             </motion.div>
           )}
         </AnimatePresence>

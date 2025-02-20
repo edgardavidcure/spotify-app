@@ -1,10 +1,8 @@
 export interface Song {
   id: string;
   name: string;
-  album: {
-    images: { url: string }[];
-  };
   artists: { name: string }[];
+  images: { url: string }[];
 }
 
 export interface TopSongsCardProps {
