@@ -60,6 +60,10 @@ async function refreshAccessToken(token: JWT) {
     };
   } catch (error) {
     console.error("Error refreshing access token:", error);
+
+    if ((error as { error: string }).error === "invalid_grant") {
+      return { ...token, error: "RefreshTokenRevoked" };
+    }
     return { ...token, error: "RefreshTokenError" };
   }
 }
