@@ -11,10 +11,13 @@ export default async function Home({
 }) {
   const session = await auth();
 
-  if (session?.error === "RefreshTokenRevoked") {
-    console.log("Refresh token has been revoked. Signing out.");
+  if (
+    session?.error === "RefreshTokenRevoked" ||
+    session?.error === "RefreshTokenExpired"
+  ) {
+    console.log("Refresh token has been revoked or expired. Signing out.");
     signOut();
-    redirect("/"); // Redirect to the login page or another appropriate page
+    redirect("/login"); // Redirect to the login page or another appropriate page
   }
 
   if (!session) {
