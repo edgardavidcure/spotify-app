@@ -123,21 +123,27 @@ export default function CreateProfile({ session }: { session: Session }) {
 
       {/* Input Fields */}
       <div className="space-y-4">
+        <label htmlFor="username">Username:</label>
         <input
           type="text"
+          id="username"
+          name="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Username"
           className="w-full p-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 placeholder-gray-400"
         />
+        <label htmlFor="email">Email:</label>
         <input
           type="email"
+          id="email"
+          name="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           className="w-full p-3 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 placeholder-gray-400"
         />
-        <label htmlFor="image">Profile Picture</label>
+        <label htmlFor="image">Profile Picture:</label>
         <input
           type="file"
           id="image"
