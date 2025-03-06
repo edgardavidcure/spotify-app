@@ -11,7 +11,6 @@ const UserSchema = new Schema({
   lastFetched: { type: Date, default: Date.now },
   createdAt: { type: Date, default: Date.now },
 });
-UserSchema.index({ spotifyId: 1 }, { unique: true });
 
 export const User = models.User || model("User", UserSchema);
 // ========================== Top Data Schema ==========================
