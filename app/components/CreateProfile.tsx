@@ -65,7 +65,6 @@ export default function CreateProfile({ session }: { session: Session }) {
     // Send Profile Data
     const response = await fetch("/api/create-profile", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         spotifyId: session.user?.id,
         username,
