@@ -14,7 +14,7 @@ export default async function Home({
 }) {
   try {
     const session = await auth();
-    dbConnect();
+    await dbConnect();
 
     if (
       session?.error === "RefreshTokenRevoked" ||
@@ -37,9 +37,7 @@ export default async function Home({
 
     if (!spotifyId) {
       console.error("User ID is undefined.");
-      return (
-        <p className="text-white">Error loading data. Please try again.</p>
-      );
+      redirect("/signin");
     }
 
     const params = await searchParams;
@@ -80,6 +78,6 @@ export default async function Home({
     );
   } catch (error) {
     console.error(error);
-    return <p className="text-white">Error loading data. Please try again.</p>;
+    redirect("/signin");
   }
 }
