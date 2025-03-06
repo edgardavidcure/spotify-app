@@ -15,7 +15,9 @@ export default async function dbConnect() {
     return cachedDb;
   }
 
-  const db = await mongoose.connect(MONGODB_URI);
+  const db = await mongoose.connect(MONGODB_URI, {
+    serverSelectionTimeoutMS: 10000, // 30 seconds
+  });
 
   cachedDb = db.connection;
   return db;
