@@ -17,13 +17,15 @@ interface Item {
 interface TopItemsCardProps {
   title: string;
   items: Item[];
-  type: "artists" | "songs"; // Type to differentiate between artists and songs
+  type: "artists" | "songs";
+  limit: number | undefined; // Type to differentiate between artists and songs
 }
 
 export default function TopItemsCard({
   title,
   items,
   type,
+  limit,
 }: TopItemsCardProps) {
   return (
     <motion.div
@@ -37,7 +39,7 @@ export default function TopItemsCard({
       {items.length > 0 ? (
         <ul className="space-y-4">
           <AnimatePresence>
-            {items.map((item, index) => (
+            {items.slice(0, limit).map((item, index) => (
               <motion.li
                 key={item.id}
                 initial={{ opacity: 0, y: -10 }}

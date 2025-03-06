@@ -101,7 +101,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     error: "/signin", // Error code passed in query string as ?error=
   },
   callbacks: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     async jwt({
       token,
       account,

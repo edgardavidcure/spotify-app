@@ -11,7 +11,7 @@ const tabs = [
   { id: "topArtists", label: "Top Artists" },
 ];
 
-export default function TopTab({ topArtists, topSongs }: TopTabProps) {
+export default function TopTab({ topArtists, topSongs, limit }: TopTabProps) {
   const [activeTab, setActiveTab] = useState<string>("topSongs");
 
   const activeStyles = useMemo(() => "text-white shadow-lg", []);
@@ -71,6 +71,7 @@ export default function TopTab({ topArtists, topSongs }: TopTabProps) {
                 title="🎤 Top Artists"
                 items={topArtists.items}
                 type="artists"
+                limit={limit}
               />
             </motion.div>
           )}
@@ -88,6 +89,7 @@ export default function TopTab({ topArtists, topSongs }: TopTabProps) {
                 title="🎵 Top Songs"
                 items={topSongs.items}
                 type="songs"
+                limit={limit}
               />
             </motion.div>
           )}

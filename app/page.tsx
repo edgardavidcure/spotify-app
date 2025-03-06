@@ -1,83 +1,85 @@
 import { redirect } from "next/navigation";
 import { auth } from "./auth";
+import CreateProfile from "./components/CreateProfile";
 import HeroSection from "./components/HeroSection";
 import ProfileCard from "./components/ProfileCard";
 import TopTab from "./components/TopTab";
-
+import dbConnect from "./lib/db";
+import { fetchUserDataFromAPI } from "./services/spotifyService";
+import { getUserWithFreshData } from "./services/userService";
 export default async function Home({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string | undefined>>;
 }) {
-  const session = await auth();
-
-  if (
-    session?.error === "RefreshTokenRevoked" ||
-    session?.error === "RefreshTokenExpired"
-  ) {
-    console.log("Refresh token has been revoked or expired. Signing out.");
-    redirect("/signin"); // Redirect to the login page or another appropriate page
-  }
-
-  if (!session) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-[#1DB954] to-[#191414] p-8">
-        <HeroSection />
-      </div>
-    );
-  } else {
-  }
-
-  const token = session.accessToken;
-
-  // ✅ Await searchParams before using them
-  const params = await searchParams;
-  const numItems = parseInt(params?.limit ?? "5", 10);
-
-  // If limit is invalid, redirect to default
-  if (isNaN(numItems) || numItems <= 0) {
-    redirect("/?limit=5");
-  }
-
   try {
-    // Fetch Spotify profile data
-    const profileResponse = await fetch("https://api.spotify.com/v1/me", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
-    const profile = await profileResponse.json();
+    const session = await auth();
+    dbConnect();
 
-    // Fetch Top Artists (Default limit: 5)
-    const artistsResponse = await fetch(
-      `https://api.spotify.com/v1/me/top/artists?limit=${numItems}&time_range=medium_term`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    const topArtists = await artistsResponse.json();
+    if (
+      session?.error === "RefreshTokenRevoked" ||
+      session?.error === "RefreshTokenExpired"
+    ) {
+      console.log("Refresh token has been revoked or expired. Signing out.");
+      redirect("/signin"); // Redirect to the login page or another appropriate page
+    }
 
-    // Fetch Top Songs (Default limit: 5)
-    const songsResponse = await fetch(
-      `https://api.spotify.com/v1/me/top/tracks?limit=${numItems}&time_range=medium_term`,
-      {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    const topSongs = await songsResponse.json();
+    if (!session) {
+      return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-[#1DB954] to-[#191414] p-8">
+          <HeroSection />
+        </div>
+      );
+    }
+
+    const token = session.accessToken;
+    const spotifyId = session.user?.id;
+
+    if (!spotifyId) {
+      console.error("User ID is undefined.");
+      return (
+        <p className="text-white">Error loading data. Please try again.</p>
+      );
+    }
+
+    const params = await searchParams;
+    const limit = parseInt(params?.limit ?? "5", 10);
+
+    if (isNaN(limit) || limit <= 0) {
+      redirect("/?limit=5");
+    }
+
+    const user = await getUserWithFreshData(spotifyId, token);
+    const { topArtists, topSongs } = await fetchUserDataFromAPI(token);
+    let profile;
+
+    if (!user) {
+      return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-[#1DB954] to-[#191414] p-8">
+          <CreateProfile session={session} />
+        </div>
+      );
+    } else {
+      profile = {
+        spotifyId: user.spotifyId,
+        username: user.username,
+        email: user.email,
+        profilePicture: user.profilePicture,
+        topArtists: user.topArtists,
+        topSongs: user.topSongs,
+      };
+    }
 
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-[#1DB954] to-[#191414] p-8">
-        <ProfileCard session={session} spotifyProfile={profile} />
-        {/* User selection should be handled in a Client Component */}
+        <ProfileCard session={session.user} profile={profile} />
         <div className="flex flex-col items-center justify-between mt-8">
-          <TopTab topArtists={topArtists} topSongs={topSongs} />
+          <TopTab topArtists={topArtists} topSongs={topSongs} limit={limit} />
         </div>
       </div>
     );
   } catch (error) {
-    console.error("Error fetching data from Spotify:", error);
+    console.error(error);
     return <p className="text-white">Error loading data. Please try again.</p>;
   }
 }

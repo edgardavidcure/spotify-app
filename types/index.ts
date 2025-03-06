@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 export interface Song {
   id: string;
   name: string;
@@ -28,4 +30,12 @@ export interface TopArtistsCardProps {
 export interface TopTabProps {
   topArtists: TopArtistsCardProps;
   topSongs: TopSongsCardProps;
+  limit?: number;
+}
+
+export interface GlobalMongoose {
+  mongoose: {
+    conn: typeof mongoose | null;
+    promise: Promise<typeof mongoose> | null;
+  };
 }

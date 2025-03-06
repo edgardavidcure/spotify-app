@@ -1,13 +1,13 @@
 // Generates a consistent background color based on the user's name
 export const generateColor = (name: string): string => {
   const colors = [
-    "bg-red-500",
-    "bg-blue-500",
-    "bg-green-500",
-    "bg-yellow-500",
-    "bg-purple-500",
-    "bg-pink-500",
-    "bg-indigo-500",
+    "#EF4444", // Red
+    "#3B82F6", // Blue
+    "#10B981", // Green
+    "#F59E0B", // Yellow
+    "#8B5CF6", // Purple
+    "#EC4899", // Pink
+    "#6366F1", // Indigo
   ];
   const index = name
     ? name.charCodeAt(0) % colors.length // Generate consistent color per user
