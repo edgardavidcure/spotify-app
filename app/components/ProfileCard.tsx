@@ -19,7 +19,8 @@ export default function ProfileCard({ session, profile }: any) {
         {session ? (
           <>
             {/* Conditional Image Rendering */}
-            {typeof userImage === "string" && userImage.startsWith("<svg") ? (
+            {typeof userImage === "string" &&
+            userImage.trim().startsWith("<svg") ? (
               // If SVG is stored as a string, render it using ReactSVG
               <div className="w-28 h-28 rounded-full border-4 border-green-400 shadow-md">
                 <ReactSVG
@@ -28,14 +29,23 @@ export default function ProfileCard({ session, profile }: any) {
                   )}`}
                 />
               </div>
-            ) : (
-              // Default to Image component for regular image URLs
+            ) : userImage ? (
+              // Default to Image component for valid image URLs
               <Image
                 className="rounded-full border-4 border-green-400 shadow-md"
                 src={userImage}
                 width={120}
                 height={120}
                 alt="User"
+              />
+            ) : (
+              // Fallback if no image is available
+              <Image
+                className="rounded-full border-4 border-gray-500 shadow-md"
+                src="/file.svg"
+                width={120}
+                height={120}
+                alt="Default Avatar"
               />
             )}
 

@@ -4,6 +4,7 @@ import type { PutBlobResult } from "@vercel/blob";
 import { Session } from "next-auth";
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { ReactSVG } from "react-svg";
 
 export default function CreateProfile({ session }: { session: Session }) {
   const [username, setUsername] = useState(session.user?.name || "");
@@ -92,13 +93,21 @@ export default function CreateProfile({ session }: { session: Session }) {
       {/* Profile Picture Preview */}
       <div className="flex flex-col items-center space-y-2">
         {useGeneratedSVG ? (
-          <div
-            className="w-24 h-24 rounded-full overflow-hidden border-4 border-green-500 shadow-lg"
-            dangerouslySetInnerHTML={{ __html: defaultSVG }}
+          <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-green-500 shadow-lg">
+            <ReactSVG src={`data:image/svg+xml;base64,${btoa(defaultSVG)}`} />
+          </div>
+        ) : previewImage.startsWith("data:image") ||
+          previewImage.startsWith("https") ? (
+          <Image
+            src={previewImage}
+            alt="Profile Picture"
+            width={96}
+            height={96}
+            className="rounded-full border-4 border-green-500 shadow-lg"
           />
         ) : (
           <Image
-            src={previewImage || "/file.svg"}
+            src="/file.svg"
             alt="Profile Picture"
             width={96}
             height={96}
